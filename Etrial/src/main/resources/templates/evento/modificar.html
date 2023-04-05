@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Modificar Categoría</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <div class="contenido">
+            <h2>Datos de la categoría</h2>
+            <a th:href="@{/evento/listado}">Regresar</a>
+            <br/>
+            <br/>
+            <form th:action="@{/evento/guardar}" method="POST" th:object="${evento}">
+                <input type="hidden" name="idEvento" th:field="*{idEvento}"/>
+
+                <label for="descripcion">Descripción:</label><br/>
+                <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"/><br/>
+
+                <label for="activo">Activo:</label><br/>
+                <input type="checkbox" id="activo" name="activo" th:field="*{activo}"/><br/><br/>
+                <input type="submit" name="guardar" value="Guardar"/>
+            </form>
+        </div>
+        <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>

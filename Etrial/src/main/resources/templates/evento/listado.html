@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista Categorías</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <div class="contenido">
+            <h2>Lista de Categoría</h2>
+            <a th:href="@{/evento/nueva}">Nuevo Evento</a>
+            <div th:if="${listaEventos!=null and !listaEventos.empty}">
+                <table border="1">
+                    <thead>
+                    <th>Descripción</th>
+                    <th>Activa</th>
+                    <tbody>
+                        <tr th:each="item: ${listaEventos}">
+                            <td th:text="${item.descripcion}"></td>
+                            <td><input type="checkbox" name="activa" th:checked="${item.activo}" disabled="true"></td>
+                            <td><a th:href="@{/evento/modificar/}+${item.idEvento}">Modificar</a></td>
+                            <td><a th:href="@{/evento/eliminar/}+${item.idEvento}">Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+            <div th:if="${listaEventos==null or listaEventos.empty}">
+                <p>¡La lista esta vacía!</p>
+            </div>
+        </div>
+            <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>

@@ -1,13 +1,13 @@
-package com.etrial.project;
+package com.Etrial;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjectApplication {
+public class EtrialApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjectApplication.class, args);
+		SpringApplication.run(EtrialApplication.class, args);
 	}
 
 }
