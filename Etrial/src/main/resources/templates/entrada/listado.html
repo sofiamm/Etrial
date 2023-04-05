@@ -10,7 +10,7 @@
         <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
             <h2>Lista de Artículos</h2>
-            <a th:href="@{/articulo/nuevo}">Nuevo artículo</a>
+            <a th:href="@{/entrada/nuevo}">Nuevo artículo</a>
             <div th:if="${listaArticulos != null and !listaArticulos.empty}">
                 <table border="1">
                     <thead>
@@ -27,14 +27,14 @@
                             <td th:text="${item.existencias}" style="text-align: center"></td> 
                             <td><input type="checkbox" name="activa" th:checked="${item.activo}" disabled="true"></td>
 
-                            <td><a th:href="@{/articulo/eliminar/} + ${item.idArticulo}">Eliminar</a></td>
-                            <td><a th:href="@{/articulo/modificar/} + ${item.idArticulo}">Modificar</a></td>
+                            <td><a th:href="@{/entrada/eliminar/} + ${item.idArticulo}">Eliminar</a></td>
+                            <td><a th:href="@{/entrada/modificar/} + ${item.idArticulo}">Modificar</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div th:if="${listaArticulos == null or listaArticulos.empty}">
-                No tenemos articulos que mostrar...
+                No tenemos entradas que mostrar...
             </div>
             <footer th:replace="layout/plantilla :: footer" />
     </body>

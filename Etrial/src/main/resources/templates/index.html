@@ -8,20 +8,20 @@
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <div class="container">
-            <h2 th:text="#{index.titulo}">Nuestros Articulos</h2>            
-            <div class="row row-cols-3" th:if="${listaArticulos != null and !listaArticulos.empty}">
-                <div class="card" th:each="articulo : ${listaArticulos}" >
+            <h2 th:text="#{index.titulo}">Nuestros Entradas</h2>            
+            <div class="row row-cols-3" th:if="${listaEntradas != null and !listaEntradas.empty}">
+                <div class="card" th:each="entrada : ${listaEntradas}" >
                     <!--     <img src="/images/equipo1.jpg" class="card-img-top" alt="equipo">  -->
                     <div class="card-body">
-                        <h5 class="card-title">[[${articulo.descripcion}]]</h5>
-                        <h6 class="card-subtitle mb-2 text-muted text-end">¢[[${#numbers.formatDecimal(articulo.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</h6>
-                        <a class="card-link" th:href="@{/carrito/agregar/} + ${articulo.idArticulo}">[[#{articulo.comprar}]]</a>
-                        <p class="card-text">[[${articulo.detalle}]]</p>                        
+                        <h5 class="card-title">[[${entrada.descripcion}]]</h5>
+                        <h6 class="card-subtitle mb-2 text-muted text-end">¢[[${#numbers.formatDecimal(entrada.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</h6>
+                        <a class="card-link" th:href="@{/carrito/agregar/} + ${entrada.idEntrada}">[[#{entrada.comprar}]]</a>
+<!--                        <p class="card-text">[[${entrada.detalle}]]</p>                        -->
                     </div>
                 </div>                
             </div>
-            <div th:if="${listaArticulos == null or listaArticulos.empty}"  th:text="#{articulo.no_mostrar}">
-                No tenemos lista de articulos que mostrar...
+            <div th:if="${listaEntradas == null or listaEntradas.empty}"  th:text="#{entrada.no_mostrar}">
+                No tenemos lista de entradas que mostrar...
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>

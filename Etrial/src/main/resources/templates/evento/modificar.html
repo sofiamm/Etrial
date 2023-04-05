@@ -10,11 +10,11 @@
         <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
             <h2>Datos de la categoría</h2>
-            <a th:href="@{/categoria/listado}">Regresar</a>
+            <a th:href="@{/evento/listado}">Regresar</a>
             <br/>
             <br/>
-            <form th:action="@{/categoria/guardar}" method="POST" th:object="${categoria}">
-                <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
+            <form th:action="@{/evento/guardar}" method="POST" th:object="${evento}">
+                <input type="hidden" name="idEvento" th:field="*{idEvento}"/>
 
                 <label for="descripcion">Descripción:</label><br/>
                 <input type="text" id="descripcion" name="descripcion" th:field="*{descripcion}"/><br/>

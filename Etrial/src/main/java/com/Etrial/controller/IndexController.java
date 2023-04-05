@@ -1,6 +1,6 @@
 package com.Etrial.controller;
 
-import com.Etrial.service.ArticuloService;
+import com.Etrial.service.EntradaService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class IndexController {
 
     @Autowired
-    ArticuloService articuloService;
+    EntradaService entradaService;
 
     @GetMapping("/")
     public String inicio(Model model) {
-        var articulos = articuloService.getArticulos(true);
-        model.addAttribute("listaArticulos", articulos);
+        var entradas = entradaService.getEntradas(true);
+        model.addAttribute("listaEntradas", entradas);
         return "index";
     }
 

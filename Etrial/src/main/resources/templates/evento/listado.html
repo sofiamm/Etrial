@@ -10,24 +10,24 @@
         <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
             <h2>Lista de Categoría</h2>
-            <a th:href="@{/categoria/nueva}">Nuevo Categoria</a>
-            <div th:if="${listaCategorias!=null and !listaCategorias.empty}">
+            <a th:href="@{/evento/nueva}">Nuevo Evento</a>
+            <div th:if="${listaEventos!=null and !listaEventos.empty}">
                 <table border="1">
                     <thead>
                     <th>Descripción</th>
                     <th>Activa</th>
                     <tbody>
-                        <tr th:each="item: ${listaCategorias}">
+                        <tr th:each="item: ${listaEventos}">
                             <td th:text="${item.descripcion}"></td>
                             <td><input type="checkbox" name="activa" th:checked="${item.activo}" disabled="true"></td>
-                            <td><a th:href="@{/categoria/modificar/}+${item.idCategoria}">Modificar</a></td>
-                            <td><a th:href="@{/categoria/eliminar/}+${item.idCategoria}">Eliminar</a></td>
+                            <td><a th:href="@{/evento/modificar/}+${item.idEvento}">Modificar</a></td>
+                            <td><a th:href="@{/evento/eliminar/}+${item.idEvento}">Eliminar</a></td>
                         </tr>
                     </tbody>
                     </thead>
                 </table>
             </div>
-            <div th:if="${listaCategorias==null or listaCategorias.empty}">
+            <div th:if="${listaEventos==null or listaEventos.empty}">
                 <p>¡La lista esta vacía!</p>
             </div>
         </div>

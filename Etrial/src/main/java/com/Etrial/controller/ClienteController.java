@@ -62,7 +62,6 @@ public class ClienteController {
 
     @PostMapping("/cliente/busqueda")
     public String busqueda(Cliente cliente, Model model) {
-        //var clientes = clienteService.getClientePorApellidos(cliente.getApellidos());
         var clientes = clienteService.getClientePorNombreApellidoTelefono(cliente.getNombre(), cliente.getNombre(), cliente.getNombre());
         model.addAttribute("resultados", clientes);
         return "/cliente/buscar";

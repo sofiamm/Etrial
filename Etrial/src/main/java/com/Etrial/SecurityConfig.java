@@ -17,18 +17,18 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService users() {
         UserDetails admin = User.builder()
-                .username("juan")
+                .username("ADMIN")
                 .password("{noop}123")
                 .roles("USER", "VENDEDOR", "ADMIN")
                 .build();
         UserDetails sales = User.builder()
-                .username("rebeca")
-                .password("{noop}456")
+                .username("VENDEDOR")
+                .password("{noop}123")
                 .roles("USER", "VENDEDOR")
                 .build();
         UserDetails user = User.builder()
-                .username("pedro")
-                .password("{noop}789")
+                .username("USER")
+                .password("{noop}123")
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user, sales, admin);
@@ -46,22 +46,22 @@ public class SecurityConfig {
                         "/error",
                         "/webjars/**").permitAll()
                 .requestMatchers(
-                        "/articulo/nuevo",
-                        "/articulo/guardar",
-                        "/articulo/modificar/**",
-                        "/articulo/eliminar/**",
-                        "/categoria/nuevo",
-                        "/categoria/guardar",
-                        "/categoria/modificar/**",
-                        "/categoria/eliminar/**",
+                        "/entrada/nuevo",
+                        "/entrada/guardar",
+                        "/entrada/modificar/**",
+                        "/entrada/eliminar/**",
+                        "/evento/nuevo",
+                        "/evento/guardar",
+                        "/evento/modificar/**",
+                        "/evento/eliminar/**",
                         "/cliente/nuevo",
                         "/cliente/guardar",
                         "/cliente/modificar/**",
                         "/cliente/eliminar/**")
                 .hasRole("ADMIN")
                 .requestMatchers(
-                        "/articulo/listado",
-                        "/categoria/listado",
+                        "/entrada/listado",
+                        "/evento/listado",
                         "/cliente/listado")
                 .hasAnyRole("ADMIN", "VENDEDOR")
                 )

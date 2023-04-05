@@ -25,7 +25,7 @@ public class Credito implements Serializable {
     public Credito() {
     }
 
-    public Credito(double limite) { //El id no se incluye porque se autogenera
+    public Credito(double limite) {
         this.limite = limite;
     }
 }
