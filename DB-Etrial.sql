@@ -1,13 +1,13 @@
 /*Las líneas 2 y 3 están en comentarios, para usarse así la primera vez... luego de eso se quitan los comentarios para que todo funcione bien, en las siguientes ejecuciones */
-/*drop schema etrial ;
-drop user usuario_prueba;*/
+drop schema etrial ;
+drop user usuario_proyecto;
 
 /*Se crea la base de datos */
 CREATE SCHEMA etrial ;
-/*Se crea un usuario para la base de datos llamado "usuario_prueba" y tiene la contraseña "Usuario_Clave."*/
-create user 'usuario_prueba'@'%' identified by 'Usuar1o_Clave.';
+/*Se crea un usuario para la base de datos llamado "usuario_proyecto" y tiene la contraseña "Clave123"*/
+create user 'usuario_proyecto'@'%' identified by 'Clave123';
 /*Se asignan los prvilegios sobr ela base de datos etrial al usuario creado */
-grant all privileges on etrial.* to 'usuario_prueba'@'%';
+grant all privileges on etrial.* to 'usuario_proyecto'@'%';
 flush privileges;
 
 create table etrial.credito (
@@ -25,7 +25,7 @@ CREATE TABLE etrial.cliente (
   id_credito INT NOT NULL,
   nombre VARCHAR(20) NOT NULL,
   apellidos VARCHAR(30) NOT NULL,
-  correo VARCHAR(25) NULL,
+  correo VARCHAR(60) NULL,
   telefono VARCHAR(15) NULL,
   PRIMARY KEY (`id_cliente`),
   foreign key fk_cliente_credito (id_credito) references credito(id_credito)  )
@@ -45,13 +45,14 @@ COLLATE = utf8mb4_eo_0900_ai_ci;
 create table etrial.entrada (
   id_entrada INT NOT NULL AUTO_INCREMENT,
   id_evento INT NOT NULL,
-  descripcion VARCHAR(30) NOT NULL,  
-  detalle VARCHAR(1600) NOT NULL, 
+  descripcion VARCHAR(30) NOT NULL,
+  id_cliente INT NOT NULL,
   precio double,
   existencias int,
   activo bool,
   PRIMARY KEY (id_entrada),
-  foreign key fk_entrada_caregoria (id_evento) references evento(id_evento)  
+  foreign key fk_entrada_caregoria (id_evento) references evento(id_evento), 
+  foreign key fk_factura_cliente (id_cliente) references cliente(id_cliente)  
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -124,20 +125,8 @@ INSERT INTO etrial.factura (id_factura,id_cliente,fecha,total,estado) VALUES
 
 INSERT INTO etrial.venta (id_venta,id_factura,id_entrada,precio,cantidad) values
 (1,1,5,45000,3),
-(2,1,9,15780,2),
-(3,1,10,15000,3),
-(4,2,5,45000,1),
-(5,2,14,154000,3),
-(6,2,9,15780,3),
-(7,3,14,154000,1),
-(8,3,6,57000,1),
-(9,3,15,330000,2),
-(10,1,6,57000,2),
-(11,1,8,27600,3),
-(12,1,9,15780,3),
-(13,2,8,27600,3),
-(14,2,14,154000,2),
-(15,2,3,24000,1),
-(16,3,15,330000,1),
-(17,3,12,45000,1),
-(18,3,10,15000,3);
+(2,2,3,15780,2),
+(3,3,8,15000,3),
+(4,1,5,45000,1),
+(5,2,6,154000,3),
+(6,3,2,15780,3);
