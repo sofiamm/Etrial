@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Lista Artículos</title>
+        <title>Lista Entradas</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
@@ -9,9 +9,9 @@
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <div class="contenido">
-            <h2>Lista de Artículos</h2>
-            <a th:href="@{/entrada/nuevo}">Nuevo artículo</a>
-            <div th:if="${listaArticulos != null and !listaArticulos.empty}">
+            <h2>Lista de Entradas</h2>
+            <a th:href="@{/entrada/nuevo}">Nuevo entrada</a>
+            <div th:if="${listaEntradas != null and !listaEntradas.empty}">
                 <table border="1">
                     <thead>
                     <th>Descripción</th>
@@ -21,19 +21,19 @@
                     <th colspan="2">Acciones</th>
                     </thead>
                     <tbody>
-                        <tr th:each="item: ${listaArticulos}">
+                        <tr th:each="item: ${listaEntradas}">
                             <td th:text="${item.descripcion}"></td>
                             <td th:text="${#numbers.formatDecimal(item.precio, 3, 2)}" style="text-align: right"></td>
                             <td th:text="${item.existencias}" style="text-align: center"></td> 
                             <td><input type="checkbox" name="activa" th:checked="${item.activo}" disabled="true"></td>
 
-                            <td><a th:href="@{/entrada/eliminar/} + ${item.idArticulo}">Eliminar</a></td>
-                            <td><a th:href="@{/entrada/modificar/} + ${item.idArticulo}">Modificar</a></td>
+                            <td><a th:href="@{/entrada/eliminar/} + ${item.idEntrada}">Eliminar</a></td>
+                            <td><a th:href="@{/entrada/modificar/} + ${item.idEntrada}">Modificar</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div th:if="${listaArticulos == null or listaArticulos.empty}">
+            <div th:if="${listaEntradas == null or listaEntradas.empty}">
                 No tenemos entradas que mostrar...
             </div>
             <footer th:replace="layout/plantilla :: footer" />
