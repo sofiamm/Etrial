@@ -13,9 +13,11 @@
                 <div class="card" th:each="evento : ${listaEventos}" >
                     <!--     <img src="/images/equipo1.jpg" class="card-img-top" alt="equipo">  -->
                     <div class="card-body">
-                        <h5 class="card-title">[[${evento.descripcion}]]</h5>
+                        <h3 class="card-title">[[${evento.nombre}]]</h3>
+                        <h5 class="card-title">[[${evento.lugar}]]</h5>
                         <figure>
                             <img th:src="${evento.rutaImagen}" height="150"/>
+                            <p class="card-title">[[${evento.descripcion}]]</p>
                             <figcaption>
                                 <a class="card-link" th:href="@{/carrito/agregar/} + ${evento.idEvento}">[[#{evento.comprar}]]</a>
                             </figcaption>

@@ -14,6 +14,8 @@ public class Evento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEvento;
+    private String nombre;
+    private String lugar;
     private String descripcion;
     private boolean activo;
     @Column(name = "ruta_imagen")
@@ -22,7 +24,7 @@ public class Evento implements Serializable {
     public Evento() {
     }
 
-    public Evento(String descripcion, boolean activo, String rutaImagen) {
+    public Evento(String nombre, String lugar, String descripcion, boolean activo, String rutaImagen) {
         this.descripcion = descripcion;
         this.activo = activo;
         this.rutaImagen = rutaImagen;

@@ -77,7 +77,9 @@ COLLATE = utf8mb4_eo_0900_ai_ci;
 
 create table etrial.evento (
   id_evento INT NOT NULL AUTO_INCREMENT,
-  descripcion VARCHAR(30) NOT NULL,  
+  nombre VARCHAR(30) NOT NULL,
+  lugar VARCHAR(30) NOT NULL,
+  descripcion VARCHAR(200) NOT NULL,  
   activo bool,
   ruta_imagen varchar(300),
   PRIMARY KEY (id_evento))
@@ -140,11 +142,16 @@ INSERT INTO etrial.cliente (id_cliente, id_credito, nombre, apellidos, correo, t
 (3, 3,'Aaron', 'Salamanca Carmona', 'aaronsalamanca100@gmail.com', '8801-7197');
 
 /*Se insertan eventos */
-INSERT INTO etrial.evento (id_evento,descripcion,activo,ruta_imagen) VALUES 
-('1','Malpais',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/Malpais.jpg?alt=media&token=4c7d83eb-ebb5-4e6b-9e24-91a72299d0b7'), 
-('2','Manuel Turizo',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/ManuelTurizo.jpg?alt=media&token=610b9361-9a4a-41a5-bcc5-2f6dca98315d'),
-('3','Red Hot Chilli Peppers',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/RedHotChiliPeppers.jpg?alt=media&token=5601831d-df13-4edf-b4fb-9bba8b566bd9'),
-('4','RockFest',false,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/RockFest.jpg?alt=media&token=8fac40e6-c339-4967-a2a4-31cd5c4402e8');
+INSERT INTO etrial.evento (id_evento,nombre,lugar,descripcion,activo,ruta_imagen) VALUES 
+('1','Malpais','San José','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/Malpais.jpg?alt=media&token=4c7d83eb-ebb5-4e6b-9e24-91a72299d0b7'), 
+('2','Manuel Turizo','Alajuela','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/ManuelTurizo.jpg?alt=media&token=610b9361-9a4a-41a5-bcc5-2f6dca98315d'),
+('3','Red Hot Chilli Peppers','San José','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/RedHotChiliPeppers.jpg?alt=media&token=5601831d-df13-4edf-b4fb-9bba8b566bd9'),
+('4','RockFest','Cartago','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',false,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/RockFest.jpg?alt=media&token=8fac40e6-c339-4967-a2a4-31cd5c4402e8'),
+('5','Rosario','San José','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/Rosario.jpg?alt=media&token=b8377e94-0e50-4f1f-abd4-730320a8d73f'), 
+('6','Michael Jackson','Alajuela','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/MichaelJackson.jpg?alt=media&token=bcea6925-4e7f-4d04-9ad3-bab538b454b5'),
+('7','La Cenicienta','San José','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/LaCenicienta.jpg?alt=media&token=8c52c809-e972-4765-a0b5-a31301d54791'),
+('8','Comic con','Cartago','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',false,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/C2CR.jpg?alt=media&token=bed840d3-4a40-41f7-9c66-b8e47350d30d'),
+('9','Ara Malikian','Cartago','Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.',false,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/AraMalikian.jpg?alt=media&token=8a6432cd-90b3-4131-b257-9c0000357423');
 
 /*Se insertan entradas por evento */
 INSERT INTO etrial.entrada (id_entrada,id_evento,descripcion,id_cliente,precio,existencias,activo) VALUES

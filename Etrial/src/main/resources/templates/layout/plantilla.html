@@ -4,7 +4,7 @@
     <head th:fragment="head">
         <title>Etrial</title>
         <meta charset="UTF-8">
-        <link rel="icon" href="favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="logo.ico">
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
         <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
         <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
@@ -22,13 +22,13 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav" sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_VENDEDOR')">
                             <li class="nav-item px-2">
-                                <a class="nav-link" th:href="@{/cliente/listado}" th:text="#{plantilla.clientes}">Clientes</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/cliente/listado}" th:text="#{plantilla.clientes}">Clientes</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-link" th:href="@{/evento/listado}" th:text="#{plantilla.eventos}">Eventos</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/evento/listado}" th:text="#{plantilla.eventos}">Eventos</a>
                             </li>
                             <li class="nav-item px-2">
-                                <a class="nav-link" th:href="@{/entrada/listado}" th:text="#{plantilla.entradas}">Entradas</a>
+                                <a class="nav-menu-link nav-link" th:href="@{/entrada/listado}" th:text="#{plantilla.entradas}">Entradas</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
@@ -37,6 +37,12 @@
                                     <i class="fas fa-user"></i>
                                     <span th:text="#{plantilla.bienvenido}">Bienvenido</span>
                                     <span sec:authentication="name">Usuario</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mr-3">
+                                <a href="#" class="nav-link">
+                                    <span th:text="#{plantilla.troles}">Roles:</span>
+                                    <span sec:authentication="principal.authorities">XXX</span>
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -49,11 +55,19 @@
                         </ul>
                         <ul class="navbar-nav" sec:authorize="!isAuthenticated()">
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{/login}">
-                                    <i class="fas fa-sign-in-alt"> Login</i>
-                                </a>
+                                <a class="nav-link" th:href="@{/login}"><i class="fas fa-sign-in-alt"></i></a>
                             </li>
                         </ul>
+                        <div>
+                            <ul sec:authorize="isAuthenticated()" class="navbar-nav ml-auto" th:if="${esCliente != null and esCliente}">
+                                <li class="nav-item mr-3">
+                                    <a th:href="@{/carrito/listado}" class="nav-link">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span th:text="${cantidadArticulosCarrito}" class="btn btn-danger">Cantidad</span>
+                                    </a>
+                                </li>                          
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </nav>

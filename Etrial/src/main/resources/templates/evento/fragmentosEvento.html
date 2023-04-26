@@ -13,7 +13,7 @@
                             type="button" 
                             class="btn btn-primary btn-block" 
                             data-bs-toggle="modal" 
-                            data-bs-target="#agregarCliente">
+                            data-bs-target="#agregarEvento">
                             <i class="fas fa-plus"></i> [[#{accion.agregar}]]
                         </button>
                     </div>
@@ -21,38 +21,38 @@
             </div>
         </section>
 
-        <section th:fragment="listadoClientes" id="listaClientes">
+        <section th:fragment="listadoEventos" id="listaEventos">
             <div class="container">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
-                                <h4>[[#{cliente.titulo}]]</h4>
+                                <h4>[[#{evento.titulo}]]</h4>
                             </div>
-                            <div th:if="${listaClientes != null and !listaClientes.empty}">
+                            <div th:if="${listaEventos != null and !listaEventos.empty}">
                                 <table class="table table-stryped">
                                     <thead class="thead-dark">
                                         <tr>
                                             <th>#</th>
-                                            <th th:text="#{cliente.nombre}">Nombre</th>
-                                            <th th:text="#{cliente.limite}">Límite</th>
+                                            <th th:text="#{evento.nombre}">Nombre</th>
+                                            <th>Descripción</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="cliente, contador : ${listaClientes}">
+                                        <tr th:each="evento, contador: ${listaEventos}">
                                             <td>[[${contador.count}]]</td>
-                                            <td>[[${cliente.nombre} + ' ' + ${cliente.apellidos}]]</td>
-                                            <td class="text-end">¢[[${#numbers.formatDecimal(cliente.credito.limite, 1, 'DEFAULT', 2, 'DEFAULT')}]]</td>
+                                            <td>[[${evento.nombre}]]</td>
+                                            <td>[[${evento.descripcion}]]</td>
                                             <td>
-                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/cliente/eliminar/}+${cliente.idCliente}"
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/evento/eliminar/}+${evento.idEvento}"
                                                    class="btn btn-danger">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.eliminar}]]
                                                 </a>
                                             </td>
                                             <td>
-                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/cliente/modificar/}+${cliente.idCliente}"
+                                                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/evento/modificar/}+${evento.idEvento}"
                                                    class="btn btn-success">
                                                     <i class="fas fa-angle-double-right"></i> [[#{accion.actualizar}]]
                                                 </a>
@@ -61,8 +61,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="text-center p-2" th:if="${listaClientes == null or listaClientes.empty}">
-                                <span th:text="#{cliente.no_mostrar}">Lista vacía</span>
+                            <div class="text-center p-2" th:if="${listaEventos == null or listaEventos.empty}">
+                                <span th:text="#{evento.no_mostrar}">Lista vacía</span>
                             </div>
                         </div>
                     </div>
@@ -70,36 +70,36 @@
             </div>
         </section>
 
-        <section th:fragment="agregarCliente">
-            <div id="agregarCliente" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <section th:fragment="agregarEvento">
+            <div id="agregarEvento" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header bg-info text-white">
-                            <h5 class="modal-title" th:text="#{accion.agregar}">Agregar Cliente</h5>
+                            <h5 class="modal-title" th:text="#{accion.agregar}">Agregar Evento</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div> 
-                        <form th:action="@{/cliente/guardar}" th:object="${cliente}"
+                        <form th:action="@{/evento/guardar}" th:object="${evento}"
                               method="POST" class="was-validated">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="nombre" th:text="#{cliente.nombre}">Nombre</label>
+                                    <label for="nombre" th:text="#{evento.nombre}">Nombre</label>
                                     <input type="text" class="form-control" name="nombre" required="true">
                                 </div>
                                 <div class="form-group">
-                                    <label for="apellidos" th:text="#{cliente.apellidos}">Apellidos</label>
-                                    <input type="text" class="form-control" name="apellidos" required="true">
+                                    <label for="lugar" th:text="#{evento.lugar}">Lugar</label>
+                                    <input type="text" class="form-control" name="lugar" required="true">
                                 </div>
                                 <div class="form-group">
-                                    <label for="email" th:text="#{cliente.correo}">Correo</label>
-                                    <input type="email" class="form-control" name="correo" required="true">
+                                    <label for="descripcion" th:text="#{evento.descripcion}">Descripcion</label>
+                                    <input type="descripcion" class="form-control" name="descripcion" required="true">
                                 </div>
                                 <div class="form-group">
-                                    <label for="telefono" th:text="#{cliente.telefono}">Teléfono</label>
-                                    <input type="tel" class="form-control" name="telefono">
+                                    <label for="activo">Activo:</label>
+                                    <input type="checkbox" id="activo" name="activo" th:field="*{activo}"/>
                                 </div>
                                 <div class="form-group">
-                                    <label for="limite" th:text="#{cliente.limite}">Límite</label>
-                                    <input type="number" class="form-control" name="credito.limite" required="true" step="any">
+                                    <label for="rutaImagen">Ruta de imagen:</label>
+                                    <input type="text" name="rutaImagen" th:field="*{rutaImagen}">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -111,13 +111,13 @@
             </div>
         </section>
 
-        <section th:fragment="editarCliente">            
+        <section th:fragment="editarEvento">            
             <form method="POST"
-                  th:action="@{/cliente/guardar}"
-                  th:object="${cliente}"
+                  th:action="@{/evento/guardar}"
+                  th:object="${evento}"
                   class="was-validated">
-                <input type="hidden" name="idCliente" th:field="*{idCliente}"/>
-                <section th:replace="cliente/fragmentosCliente :: botonesEditar"/> 
+                <input type="hidden" name="idEvento" th:field="*{idEvento}"/>
+                <section th:replace="evento/fragmentosEvento :: botonesEditar"/> 
                 <div id="details">
                     <div class="container">
                         <div class="row">
@@ -128,24 +128,24 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <label for="nombre" th:text="#{cliente.nombre}">Nombre: </label>
-                                            <input type="text" class="form-control" name="nombre" th:field="*{nombre}"/>
+                                            <label for="nombre" th:text="#{evento.nombre}">Nombre</label>
+                                            <input type="text" class="form-control" name="nombre" th:field="*{nombre}" required="true">
                                         </div>
                                         <div class="form-group">
-                                            <label for="apellidos" th:text="#{cliente.apellidos}">Apellidos: </label>
-                                            <input type="text"  class="form-control" name="apellidos" th:field="*{apellidos}"/>
+                                            <label for="lugar" th:text="#{evento.lugar}">Lugar</label>
+                                            <input type="text" class="form-control" name="lugar" th:field="*{lugar}" required="true">
                                         </div>
                                         <div class="form-group">
-                                            <label for="correo" th:text="#{cliente.correo}">Correo: </label>
-                                            <input type="email"  class="form-control" name="correo" th:field="*{correo}"/>
+                                            <label for="descripcion" th:text="#{evento.descripcion}">Descripcion</label>
+                                            <input type="text" class="form-control" name="descripcion" th:field="*{descripcion}" required="true">
                                         </div>
                                         <div class="form-group">
-                                            <label for="telefono" th:text="#{cliente.telefono}">Teléfono: </label>
-                                            <input type="tel"  class="form-control" name="telefono" th:field="*{telefono}"/>
+                                            <label for="activo">Activo:</label>
+                                            <input type="checkbox" id="activo" name="activo" th:field="*{activo}"/>
                                         </div>
                                         <div class="form-group">
-                                            <label for="limite" th:text="#{cliente.limite}">Limite: </label>
-                                            <input type="number"  class="form-control" name="limite" th:field="*{credito.limite}"/>
+                                            <label for="rutaImagen">Ruta de imagen:</label><br/>
+                                            <input type="text" class="form-control" name="rutaImagen" th:field="*{rutaImagen}">
                                         </div>                    
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3">
-                            <a th:href="@{/cliente/listado}" class="btn btn-ligth btn-block">
+                            <a th:href="@{/evento/listado}" class="btn btn-ligth btn-block">
                                 <i class="fas fa-arrow-left"></i> [[#{accion.regresar}]]
                             </a>
                         </div>
@@ -171,7 +171,7 @@
                             </button>
                         </div>
                         <div class="col-md-3">
-                            <a th:href="@{/cliente/eliminar/}+${cliente.idCliente}"
+                            <a th:href="@{/evento/eliminar/}+${evento.idEvento}"
                                class="btn btn-danger btn-block">
                                 <i class="fas fa-trash"></i> [[#{accion.eliminar}]]
                             </a>

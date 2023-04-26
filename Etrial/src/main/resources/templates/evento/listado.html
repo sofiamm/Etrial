@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Lista Categorías</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>Etrial</title>
+        <meta charset="UTF-8"/>
     </head>
     <body>
-        <header th:replace="layout/plantilla :: header"/>
+        <header th:replace="layout/plantilla :: header" />
         <div class="contenido">
-            <h2>Lista de Categoría</h2>
+            <h2>Lista Eventos</h2>
             <a th:href="@{/evento/nueva}">Nuevo Evento</a>
             <div th:if="${listaEventos!=null and !listaEventos.empty}">
                 <table border="1">
