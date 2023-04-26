@@ -19,6 +19,48 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_eo_0900_ai_ci;
 
+CREATE TABLE `etrial`.`usuario` (
+`id_usuario` INT NOT NULL AUTO_INCREMENT, 
+`username` VARCHAR(50) NOT NULL, 
+`password` VARCHAR(200) NOT NULL,
+`id_cliente` INT NULL,
+PRIMARY KEY (`id_usuario`) )
+ENGINE = innoDB;
+
+CREATE TABLE `etrial`.`rol` (
+`id_rol` INT NOT NULL AUTO_INCREMENT, 
+`nombre` VARCHAR(50) NOT NULL, 
+id_usuario int,
+PRIMARY KEY (`id_rol`),
+foreign key fk_rol_usuario (id_usuario) references usuario(id_usuario))
+ENGINE = innoDB;
+
+insert into etrial.usuario (id_usuario, username, password) values (1,'ADMIN','123'),
+(2,'VENDEDOR','456'),
+(3,'USER','789');
+
+insert into etrial.rol (id_rol, nombre, id_usuario) values
+ (1,'ROLE_ADMIN',1),
+ (2,'ROLE_VENDEDOR',1),
+ (3,'ROLE_USER',1),
+ (4,'ROLE_VENDEDOR',2),
+ (5,'ROLE_USER',2),
+ (6,'ROLE_USER',3);
+ 
+ update etrial.usuario SET `password` = '$2a$10$FJhN/uYhjlBxi3qPt3ZA1Oyi10Jy1sjyPkiPzSh/Wz46W/uKXR.DS' where id_usuario = 1;
+update etrial.usuario SET `password` = '$2a$10$gNZPJYEtHSCfZ.BJ4lUlr.ALIZbR6xhKmLxq5uYBWLfeHSVjMIaJG' where id_usuario = 2;
+update etrial.usuario SET `password` = '$2a$10$7zESpn5m7vC5Xfll1P8YUulSxQhgxwlpwytAHUNM46ndJ.DbHZNwG' where id_usuario = 3;
+
+CREATE TABLE `etrial`.`carrito` (`id_carrito` INT NOT NULL AUTO_INCREMENT, `id_cliente` INT NOT NULL, PRIMARY KEY (`id_carrito`),
+foreign key fk_carrito_cliente (id_cliente) references cliente(id_cliente) )
+ENGINE = innoDB;
+ 
+CREATE TABLE `etrial`.`carrito_detalle` (`id_detalle` INT NOT NULL AUTO_INCREMENT, `id_carrito` INT NOT NULL, `id_evento` INT NOT NULL, 
+`precio` DOUBLE NOT NULL, `cantidad` INT NOT NULL, PRIMARY KEY (`id_detalle`),
+foreign key fk_detalle_carrito (id_carrito) references carrito(id_carrito),
+foreign key fk_detalle_evento (id_evento) references evento(id_evento) )
+ENGINE = innoDB;
+
 /*Se crea la tabla de clientes llamada cliente... igual que la clase Cliente */
 CREATE TABLE etrial.cliente (
   id_cliente INT NOT NULL AUTO_INCREMENT,
@@ -37,6 +79,7 @@ create table etrial.evento (
   id_evento INT NOT NULL AUTO_INCREMENT,
   descripcion VARCHAR(30) NOT NULL,  
   activo bool,
+  ruta_imagen varchar(300),
   PRIMARY KEY (id_evento))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
@@ -96,12 +139,12 @@ INSERT INTO etrial.cliente (id_cliente, id_credito, nombre, apellidos, correo, t
 (2, 2,'Daniel', 'Roda Solano', 'danielroda2406@gmail.com', '8415-9808'),
 (3, 3,'Aaron', 'Salamanca Carmona', 'aaronsalamanca100@gmail.com', '8801-7197');
 
-/*Se insertan eventos de entradas */
-INSERT INTO etrial.evento (id_evento,descripcion,activo) VALUES 
-('1','Concierto 1',true), 
-('2','Concierto 2',true),
-('3','Concierto 3',true),
-('4','Concierto 4',false);
+/*Se insertan eventos */
+INSERT INTO etrial.evento (id_evento,descripcion,activo,ruta_imagen) VALUES 
+('1','Malpais',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/Malpais.jpg?alt=media&token=4c7d83eb-ebb5-4e6b-9e24-91a72299d0b7'), 
+('2','Manuel Turizo',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/ManuelTurizo.jpg?alt=media&token=610b9361-9a4a-41a5-bcc5-2f6dca98315d'),
+('3','Red Hot Chilli Peppers',true,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/RedHotChiliPeppers.jpg?alt=media&token=5601831d-df13-4edf-b4fb-9bba8b566bd9'),
+('4','RockFest',false,'https://firebasestorage.googleapis.com/v0/b/fidelitas-b13ee.appspot.com/o/RockFest.jpg?alt=media&token=8fac40e6-c339-4967-a2a4-31cd5c4402e8');
 
 /*Se insertan entradas por evento */
 INSERT INTO etrial.entrada (id_entrada,id_evento,descripcion,id_cliente,precio,existencias,activo) VALUES

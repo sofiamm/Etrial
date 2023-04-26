@@ -8,19 +8,23 @@
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <div class="container">
-            <h2 th:text="#{index.titulo}">Nuestros Entradas</h2>            
-            <div class="row row-cols-3" th:if="${listaEntradas != null and !listaEntradas.empty}">
-                <div class="card" th:each="entrada : ${listaEntradas}" >
+            <h2>[[#{index.titulo}]]</h2>            
+            <div class="row row-cols-3" th:if="${listaEventos != null and !listaEventos.empty}">
+                <div class="card" th:each="evento : ${listaEventos}" >
                     <!--     <img src="/images/equipo1.jpg" class="card-img-top" alt="equipo">  -->
                     <div class="card-body">
-                        <h5 class="card-title">[[${entrada.descripcion}]]</h5>
-                        <h6 class="card-subtitle mb-2 text-muted text-end">¢[[${#numbers.formatDecimal(entrada.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</h6>
-                        <a class="card-link" th:href="@{/carrito/agregar/} + ${entrada.idEntrada}">[[#{entrada.comprar}]]</a>
+                        <h5 class="card-title">[[${evento.descripcion}]]</h5>
+                        <figure>
+                            <img th:src="${evento.rutaImagen}" height="150"/>
+                            <figcaption>
+                                <a class="card-link" th:href="@{/carrito/agregar/} + ${evento.idEvento}">[[#{evento.comprar}]]</a>
+                            </figcaption>
+                        </figure>
                     </div>
                 </div>                
             </div>
-            <div th:if="${listaEntradas == null or listaEntradas.empty}"  th:text="#{entrada.no_mostrar}">
-                No tenemos lista de entradas que mostrar...
+            <div th:if="${listaEventos == null or listaEventos.empty}">
+                [[#{evento.no_mostrar}]]
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>

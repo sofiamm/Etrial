@@ -1,10 +1,6 @@
 package com.Etrial.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -20,12 +16,15 @@ public class Evento implements Serializable {
     private Long idEvento;
     private String descripcion;
     private boolean activo;
+    @Column(name = "ruta_imagen")
+    private String rutaImagen;
 
     public Evento() {
     }
 
-    public Evento(String descripcion, boolean activo) {
+    public Evento(String descripcion, boolean activo, String rutaImagen) {
         this.descripcion = descripcion;
         this.activo = activo;
+        this.rutaImagen = rutaImagen;
     }
 }
