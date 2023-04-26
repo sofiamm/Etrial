@@ -12,14 +12,16 @@
             <div th:if="${listaEventos!=null and !listaEventos.empty}">
                 <table border="1">
                     <thead>
+                    <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Activa</th>
                     <tbody>
-                        <tr th:each="item: ${listaEventos}">
-                            <td th:text="${item.descripcion}"></td>
-                            <td><input type="checkbox" name="activa" th:checked="${item.activo}" disabled="true"></td>
-                            <td><a th:href="@{/evento/modificar/}+${item.idEvento}">Modificar</a></td>
-                            <td><a th:href="@{/evento/eliminar/}+${item.idEvento}">Eliminar</a></td>
+                        <tr th:each="evento: ${listaEventos}">
+                            <td>[[${evento.nombre}]]</td>
+                            <td>[[${evento.descripcion}]]</td>
+                            <td><input type="checkbox" name="activa" th:checked="${evento.activo}" disabled="true"></td>
+                            <td><a th:href="@{/evento/modificar/}+${evento.idEvento}">Modificar</a></td>
+                            <td><a th:href="@{/evento/eliminar/}+${evento.idEvento}">Eliminar</a></td>
                         </tr>
                     </tbody>
                     </thead>
@@ -29,6 +31,6 @@
                 <p>¡La lista esta vacía!</p>
             </div>
         </div>
-            <footer th:replace="layout/plantilla :: footer"/>
+        <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>

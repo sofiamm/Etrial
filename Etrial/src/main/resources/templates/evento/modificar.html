@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Modificar Categoría</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://wwww.thymeleaf.org" 
+      xmlns:sec="http://thymeleaft.org/extras/spring-security">
+    <head th:replace="layout/plantilla :: head">
+        <title>Etrial</title>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
@@ -26,6 +25,10 @@
                 <input type="text" name="rutaImagen" th:field="*{rutaImagen}"><br/>
                 <input type="submit" name="guardar" value="Guardar"/>
             </form>
+        </div>
+        <div th:if="${listaEventos == null or listaEventos.empty}">
+                [[#{evento.no_mostrar}]]
+            </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>
     </body>
